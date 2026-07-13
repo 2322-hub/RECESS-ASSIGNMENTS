@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; }
+        .navbar { background: #4a90d9; color: #fff; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
+        .navbar h1 { font-size: 20px; }
+        .navbar a { color: #fff; text-decoration: none; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 6px; transition: background 0.2s; }
+        .navbar a:hover { background: rgba(255,255,255,0.35); }
+        .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 32px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .container h2 { margin-bottom: 16px; color: #333; }
+        .role-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 20px; }
+        .role-admin { background: #e6f7ff; color: #0050b3; }
+        .role-cashier { background: #f6ffed; color: #237804; }
+        .role-customer { background: #fff7e6; color: #ad6800; }
+        .access-list { list-style: none; margin-top: 12px; }
+        .access-list li { padding: 10px 14px; border-bottom: 1px solid #eee; color: #555; }
+        .access-list li:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>E-Commerce System</h1>
+        <a href="/logout">Logout</a>
+    </div>
+    <div class="container">
+        <h2>Welcome, {{ username }}!</h2>
+        <span class="role-badge role-{{ role|lower }}">{{ role }}</span>
+
+        <h3>Your Access</h3>
+        <ul class="access-list">
+        {% if role == "Admin" %}
+            <li>Manage products</li>
+            <li>Manage users</li>
+            <li>View reports</li>
+            <li>Full system access</li>
+        {% elif role == "Cashier" %}
+            <li>Process payments</li>
+            <li>Handle receipts</li>
+            <li>Confirm transactions</li>
+        {% elif role == "Customer" %}
+            <li>Browse products</li>
+            <li>Add items to cart</li>
+            <li>Place orders</li>
+        {% endif %}
+        </ul>
+    </div>
+</body>
+</html>
